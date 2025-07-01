@@ -1,43 +1,21 @@
-#chatbotimport re
-
-# Predefined responses
-def get_response(user_input: str) -> str:
-    user_input = user_input.lower().strip()
-
-    # Remove punctuation for basic matching
-    user_input = re.sub(r'[^\w\s]', '', user_input)
-
-    # Rule-based pattern matching
-    if any(greet in user_input for greet in ['hello', 'hi', 'hey']):
-        return "Hello! How can I help you today?"
-
-    elif 'your name' in user_input:
-        return "I'm ChatBot, your friendly assistant."
-
-    elif 'how are you' in user_input:
-        return "I'm doing well, thank you! How can I assist you?"
-
-    elif 'thank' in user_input:
-        return "You're welcome!"
-
-    elif any(bye in user_input for bye in ['bye', 'exit', 'quit']):
-        return "Goodbye! Have a nice day!"
-
-    else:
-        return "I'm sorry, I didn't understand that. Can you try rephrasing?"
-
-
-def run_chatbot():
+def chatbot():
     print("ChatBot: Hello! Type 'bye' to exit.")
     while True:
-        user_input = input("You: ")
-        response = get_response(user_input)
-        print("ChatBot:", response)
-        if response.startswith("Goodbye"):
+        user_input = input("You: ").lower()
+
+        if "hello" in user_input or "hi" in user_input:
+            print("ChatBot: Hello there!")
+        elif "how are you" in user_input:
+            print("ChatBot: I'm good, thank you!")
+        elif "your name" in user_input:
+            print("ChatBot: I'm ChatBot.")
+        elif "thank" in user_input:
+            print("ChatBot: You're welcome!")
+        elif "bye" in user_input:
+            print("ChatBot: Goodbye!")
             break
+        else:
+            print("ChatBot: I don't understand.")
 
-
-if __name__ == '__main__':
-    run_chatbot()
-
-
+if __name__ == "__main__":
+    chatbot()
