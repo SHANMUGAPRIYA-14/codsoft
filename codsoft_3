@@ -1,1 +1,37 @@
+# Simple Content-Based Movie Recommendation System
+
+# Step 1: Sample movie data
+movies = [
+    {"title": "The Matrix", "genre": ["Action", "Sci-Fi"]},
+    {"title": "The Notebook", "genre": ["Romance", "Drama"]},
+    {"title": "John Wick", "genre": ["Action", "Thriller"]},
+    {"title": "Avengers", "genre": ["Action", "Sci-Fi"]},
+    {"title": "Titanic", "genre": ["Romance", "Drama"]},
+    {"title": "Inception", "genre": ["Action", "Sci-Fi", "Thriller"]},
+    {"title": "La La Land", "genre": ["Romance", "Musical"]},
+]
+
+# Step 2: Get user preferences
+print("Enter your preferred genres (comma separated, e.g., Action, Sci-Fi):")
+user_input = input()
+user_preferences = [genre.strip() for genre in user_input.split(",")]
+
+# Step 3: Function to recommend movies
+def recommend_movies(movies, preferences):
+    recommendations = []
+    for movie in movies:
+        match_score = len(set(movie["genre"]) & set(preferences))  # common genres
+        if match_score > 0:
+            recommendations.append((movie["title"], match_score))
+    # Sort by score (high to low)
+    recommendations.sort(key=lambda x: x[1], reverse=True)
+    return [movie[0] for movie in recommendations]
+
+# Step 4: Get recommendations
+suggested_movies = recommend_movies(movies, user_preferences)
+
+# Step 5: Display results
+print("\n🎬 Recommended Movies for You:")
+for movie in suggested_movies:
+    print("-", movie)
 
